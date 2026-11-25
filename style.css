@@ -9,37 +9,55 @@
 body { margin: 0; }
 button, textarea { font: inherit; }
 button { touch-action: manipulation; cursor: pointer; }
-button:focus-visible, .slides:focus-visible, textarea:focus-visible {
+button:focus-visible, .topic-panel:focus-visible, textarea:focus-visible {
   outline: 3px solid var(--blue);
-  outline-offset: 4px;
+  outline-offset: 3px;
 }
-.guide { max-width: 480px; margin: 0 auto; padding: 24px 0 max(24px, env(safe-area-inset-bottom)); }
+.guide { max-width: 480px; margin: 0 auto; padding: 24px 0 calc(124px + env(safe-area-inset-bottom)); }
 .intro { padding: 0 24px 18px; }
 .intro h1 { margin: 0 0 7px; font-size: 18px; font-weight: 750; letter-spacing: -.04em; }
 .intro p { margin: 0; color: #54637a; font-size: 13px; line-height: 1.6; }
-.viewer { overflow: hidden; background: #fff; border-radius: 16px; box-shadow: 0 8px 40px #17263c0a; }
-.slides {
-  display: flex;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  scrollbar-width: none;
-  overscroll-behavior-x: contain;
-  -webkit-overflow-scrolling: touch;
+.viewer { background: #fff; border-radius: 16px; box-shadow: 0 8px 40px #17263c0a; }
+.topic-panel { position: relative; padding-bottom: 24px; border-radius: inherit; }
+.topic-panel[hidden], #copy-fallback[hidden] { display: none; }
+.card-art { overflow: hidden; aspect-ratio: 1080 / 1250; border-radius: 16px 16px 0 0; }
+.card-art img { display: block; width: 100%; height: auto; }
+.topic-tabs {
+  position: fixed;
+  z-index: 10;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  width: min(100%, 480px);
+  padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+  border-top: 1px solid #d9e2ef;
+  border-radius: 16px 16px 0 0;
+  background: #fff;
+  box-shadow: 0 -8px 28px #17263c08;
 }
-.slides::-webkit-scrollbar { display: none; }
-.slide { position: relative; flex: 0 0 100%; min-width: 0; margin: 0; scroll-snap-align: start; scroll-snap-stop: always; }
-.slide img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; }
-.navigation { display: flex; justify-content: center; align-items: center; gap: 18px; padding: 18px 16px 0; }
-.arrow, .page-buttons button { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 50%; background: #fff; color: #54637a; }
-.arrow { font-size: 22px; }
-.arrow:disabled { opacity: .3; cursor: default; }
-.page-buttons { display: flex; gap: 4px; }
-.page-buttons button { font-size: 14px; font-weight: 650; background: transparent; }
-.page-buttons button[aria-current="true"] { color: #fff; background: var(--blue); }
-.page-status { margin: 12px 0 0; text-align: center; font-size: 13px; color: #54637a; }
-.action-slot { min-height: 86px; padding: 16px 24px 0; text-align: center; }
+.topic-tabs button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-width: 0;
+  min-height: 64px;
+  padding: 9px 2px;
+  border: 0;
+  border-top: 3px solid transparent;
+  border-radius: 11px 11px 4px 4px;
+  color: #54637a;
+  background: #f4f6f9;
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.45;
+}
+.topic-tabs button[aria-selected="true"] { color: var(--blue); background: #eef5ff; border-top-color: var(--blue); }
+.action-slot { padding: 20px 24px 0; text-align: center; }
 .copy-button { min-height: 44px; padding: 10px 18px; color: var(--blue); border: 1px solid #cbd9f3; border-radius: 9px; background: #fff; font-size: 14px; font-weight: 650; }
 .copy-status { margin: 8px 0 0; font-size: 13px; color: #54637a; }
 #copy-fallback { margin-top: 12px; font-size: 13px; text-align: left; }
@@ -50,7 +68,7 @@ button:focus-visible, .slides:focus-visible, textarea:focus-visible {
   :root { background: #fff; }
   .guide { padding-top: 18px; }
   .viewer { border-radius: 0; box-shadow: none; }
+  .card-art { border-radius: 0; }
   .intro { padding-bottom: 10px; }
-  .navigation { gap: 12px; }
+  .topic-tabs { border-radius: 0; }
 }
-@media (prefers-reduced-motion: reduce) { .slides { scroll-behavior: auto; } }

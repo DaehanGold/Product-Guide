@@ -1,47 +1,33 @@
-const slides = document.querySelector('#slides');
-const cards = [...slides.querySelectorAll('.slide')];
-const pageButtons = [...document.querySelectorAll('[data-page]')];
-const previous = document.querySelector('#previous');
-const next = document.querySelector('#next');
-const status = document.querySelector('#page-status');
-const requestAction = document.querySelector('#request-action');
-const names = ['각인 안내', '원본이 필요한 이유', '가능한 파일 형식', '원본 요청 방법'];
-let current = 0;
-let scrollTimer;
+const tabList = document.querySelector('[role="tablist"]');
+const tabs = [...tabList.querySelectorAll('[role="tab"]')];
+const panels = tabs.map(tab => document.getElementById(tab.getAttribute('aria-controls')));
 
-function updatePage(index) {
-  current = Math.max(0, Math.min(cards.length - 1, index));
-  previous.disabled = current === 0;
-  next.disabled = current === cards.length - 1;
-  pageButtons.forEach((button, i) => {
-    if (i === current) button.setAttribute('aria-current', 'true');
-    else button.removeAttribute('aria-current');
+function selectTab(index, focus = false) {
+  tabs.forEach((tab, i) => {
+    const selected = i === index;
+    tab.setAttribute('aria-selected', String(selected));
+    tab.tabIndex = selected ? 0 : -1;
+    panels[i].hidden = !selected;
   });
-  status.textContent = `${current + 1} / ${cards.length} · ${names[current]}`;
-  requestAction.hidden = current !== cards.length - 1;
+  if (focus) tabs[index].focus();
+  window.scrollTo({ top: 0, behavior: 'instant' });
 }
 
-function goTo(index) {
-  const target = Math.max(0, Math.min(cards.length - 1, index));
-  slides.scrollTo({ left: target * slides.clientWidth });
-  updatePage(target);
-}
-
-previous.addEventListener('click', () => goTo(current - 1));
-next.addEventListener('click', () => goTo(current + 1));
-pageButtons.forEach(button => button.addEventListener('click', () => goTo(Number(button.dataset.page))));
-slides.addEventListener('scroll', () => {
-  clearTimeout(scrollTimer);
-  scrollTimer = setTimeout(() => updatePage(Math.round(slides.scrollLeft / slides.clientWidth)), 120);
-}, { passive: true });
-slides.addEventListener('keydown', event => {
-  const targets = { ArrowLeft: current - 1, ArrowRight: current + 1, Home: 0, End: cards.length - 1 };
+tabs.forEach((tab, index) => tab.addEventListener('click', () => selectTab(index)));
+tabList.addEventListener('keydown', event => {
+  const current = tabs.indexOf(event.target);
+  if (current < 0) return;
+  const targets = {
+    ArrowLeft: (current + tabs.length - 1) % tabs.length,
+    ArrowRight: (current + 1) % tabs.length,
+    Home: 0,
+    End: tabs.length - 1,
+  };
   if (event.key in targets) {
     event.preventDefault();
-    goTo(targets[event.key]);
+    selectTab(targets[event.key], true);
   }
 });
-window.addEventListener('resize', () => slides.scrollTo({ left: current * slides.clientWidth, behavior: 'instant' }));
 
 document.querySelector('#copy-request').addEventListener('click', async () => {
   const text = document.querySelector('#request-text');

@@ -13,67 +13,60 @@
   <main class="guide">
     <header class="intro">
       <h1>우드케이스 각인 안내</h1>
-      <p id="instructions">옆으로 넘기거나 아래 버튼으로 읽어보세요.</p>
+      <p id="instructions">궁금한 내용을 하단 책갈피에서 골라보세요.</p>
     </header>
 
-    <div class="viewer" role="region" aria-roledescription="카드뉴스" aria-label="로고 원본 준비 가이드">
-      <div class="slides" id="slides" tabindex="0" aria-describedby="instructions">
-        <section class="slide" role="group" aria-roledescription="슬라이드" aria-label="1장, 전체 4장" tabindex="-1">
-          <img src="./assets/card-01.png" width="1080" height="1350" alt="" fetchpriority="high">
-          <div class="sr-only">
-            <h2>로고 각인, AI·EPS로 준비해주세요</h2>
-            <p>AI는 Adobe Illustrator 파일이에요. 우드케이스 레이저 각인에는 AI 또는 EPS 로고 원본이 필요해요.</p>
-          </div>
-        </section>
-        <section class="slide" role="group" aria-roledescription="슬라이드" aria-label="2장, 전체 4장" tabindex="-1">
-          <img src="./assets/card-02.png" width="1080" height="1350" alt="" loading="lazy">
-          <div class="sr-only">
-            <h2>왜 원본 파일이 필요한가요?</h2>
-            <p>각인할 로고의 선과 모양을 확인하기 위해서예요. 이미지는 픽셀로, 로고 원본은 선과 면 정보로 이루어져 있어요. 사진이나 캡처 이미지에는 이 선 정보가 담겨 있지 않아요.</p>
-          </div>
-        </section>
-        <section class="slide" role="group" aria-roledescription="슬라이드" aria-label="3장, 전체 4장" tabindex="-1">
-          <img src="./assets/card-03.png" width="1080" height="1350" alt="" loading="lazy">
-          <div class="sr-only">
-            <h2>이 파일로 보내주세요</h2>
-            <p>로고의 선 정보가 담긴 AI(.ai) 또는 EPS(.eps) 원본을 보내주세요. JPG, PNG, GIF, 캡처 이미지는 저희 서비스의 각인용 원본으로 사용할 수 없어요. 확장자만 바꿔도 원본 파일이 되지는 않아요.</p>
-          </div>
-        </section>
-        <section class="slide" role="group" aria-roledescription="슬라이드" aria-label="4장, 전체 4장" tabindex="-1">
-          <img src="./assets/card-04.png" width="1080" height="1350" alt="" loading="lazy">
-          <div class="sr-only">
-            <h2>원본 파일이 없으신가요?</h2>
-            <p>로고를 제작한 디자이너나 업체에 아래처럼 요청해주세요.</p>
-            <blockquote>우드케이스 레이저 각인에 사용할 로고 AI 또는 EPS 원본 파일을 보내주세요.</blockquote>
-            <p>받으신 원본 파일을 그대로 전달해주세요.</p>
-          </div>
-        </section>
-      </div>
-    </div>
-
-    <nav class="navigation" aria-label="카드 이동">
-      <button id="previous" class="arrow" type="button" aria-label="이전 카드" disabled>←</button>
-      <div class="page-buttons" aria-label="카드 바로 가기">
-        <button type="button" data-page="0" aria-label="1장: 각인 안내" aria-current="true">1</button>
-        <button type="button" data-page="1" aria-label="2장: 원본이 필요한 이유">2</button>
-        <button type="button" data-page="2" aria-label="3장: 가능한 파일 형식">3</button>
-        <button type="button" data-page="3" aria-label="4장: 원본 요청 방법">4</button>
-      </div>
-      <button id="next" class="arrow" type="button" aria-label="다음 카드">→</button>
-    </nav>
-    <p class="page-status" id="page-status" aria-live="polite" aria-atomic="true">1 / 4 · 각인 안내</p>
-
-    <div class="action-slot">
-      <div id="request-action" hidden>
-        <button class="copy-button" id="copy-request" type="button">원본 요청 문구 복사</button>
-        <p class="copy-status" id="copy-status" role="status"></p>
-        <div id="copy-fallback" hidden>
-          <label for="request-text">아래 문구를 선택해 복사해주세요.</label>
-          <textarea id="request-text" readonly rows="3">우드케이스 레이저 각인에 사용할 로고 AI 또는 EPS 원본 파일을 보내주세요.</textarea>
+    <div class="viewer" aria-describedby="instructions">
+      <section class="topic-panel" id="panel-overview" role="tabpanel" aria-labelledby="tab-overview" tabindex="0">
+        <div class="card-art"><img src="./assets/card-01.png" width="1080" height="1350" alt="" fetchpriority="high"></div>
+        <div class="sr-only">
+          <h2>로고 각인, AI·EPS로 준비해주세요</h2>
+          <p>AI는 Adobe Illustrator 파일이에요. 우드케이스 레이저 각인에는 AI 또는 EPS 로고 원본이 필요해요.</p>
         </div>
-      </div>
+      </section>
+      <section class="topic-panel" id="panel-original" role="tabpanel" aria-labelledby="tab-original" tabindex="0" hidden>
+        <div class="card-art"><img src="./assets/card-02.png" width="1080" height="1350" alt="" loading="lazy"></div>
+        <div class="sr-only">
+          <h2>왜 원본 파일이 필요한가요?</h2>
+          <p>각인할 로고의 선과 모양을 확인하기 위해서예요. 이미지는 픽셀로, 로고 원본은 선과 면 정보로 이루어져 있어요. 사진이나 캡처 이미지에는 이 선 정보가 담겨 있지 않아요.</p>
+        </div>
+      </section>
+      <section class="topic-panel" id="panel-formats" role="tabpanel" aria-labelledby="tab-formats" tabindex="0" hidden>
+        <div class="card-art"><img src="./assets/card-03.png" width="1080" height="1350" alt="" loading="lazy"></div>
+        <div class="sr-only">
+          <h2>이 파일로 보내주세요</h2>
+          <p>로고의 선 정보가 담긴 AI(.ai) 또는 EPS(.eps) 원본을 보내주세요. JPG, PNG, GIF, 캡처 이미지는 저희 서비스의 각인용 원본으로 사용할 수 없어요. 확장자만 바꿔도 원본 파일이 되지는 않아요.</p>
+        </div>
+      </section>
+      <section class="topic-panel" id="panel-request" role="tabpanel" aria-labelledby="tab-request" tabindex="0" hidden>
+        <div class="card-art"><img src="./assets/card-04.png" width="1080" height="1350" alt="" loading="lazy"></div>
+        <div class="sr-only">
+          <h2>원본 파일이 없으신가요?</h2>
+          <p>로고를 제작한 디자이너나 업체에 아래처럼 요청해주세요.</p>
+          <blockquote>우드케이스 레이저 각인에 사용할 로고 AI 또는 EPS 원본 파일을 보내주세요.</blockquote>
+          <p>받으신 원본 파일을 그대로 전달해주세요.</p>
+        </div>
+        <div class="action-slot">
+          <button class="copy-button" id="copy-request" type="button">원본 요청 문구 복사</button>
+          <p class="copy-status" id="copy-status" role="status"></p>
+          <div id="copy-fallback" hidden>
+            <label for="request-text">아래 문구를 선택해 복사해주세요.</label>
+            <textarea id="request-text" readonly rows="3">우드케이스 레이저 각인에 사용할 로고 AI 또는 EPS 원본 파일을 보내주세요.</textarea>
+          </div>
+        </div>
+      </section>
     </div>
-    <noscript><p class="no-script">카드를 옆으로 밀면 다음 내용을 볼 수 있습니다.</p></noscript>
+
+    <nav class="topic-tabs" role="tablist" aria-label="궁금한 내용 선택">
+      <button type="button" id="tab-overview" role="tab" aria-controls="panel-overview" aria-selected="true" tabindex="0"><span>각인</span> <span>안내</span></button>
+      <button type="button" id="tab-original" role="tab" aria-controls="panel-original" aria-selected="false" tabindex="-1"><span>원본이</span> <span>필요한 이유</span></button>
+      <button type="button" id="tab-formats" role="tab" aria-controls="panel-formats" aria-selected="false" tabindex="-1"><span>가능한</span> <span>파일 형식</span></button>
+      <button type="button" id="tab-request" role="tab" aria-controls="panel-request" aria-selected="false" tabindex="-1"><span>원본이</span> <span>없을 때</span></button>
+    </nav>
+    <noscript>
+      <style>.topic-panel[hidden] { display:block; } .topic-tabs,.action-slot { display:none; }</style>
+      <p class="no-script">안내 내용을 위에서부터 순서대로 확인해주세요.</p>
+    </noscript>
   </main>
 </body>
 </html>
